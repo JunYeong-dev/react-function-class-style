@@ -19,13 +19,27 @@ function FuncComp(props) {
   var number = numberState[0];
   // 배열의 두번째는 상태를 변경할 수 있는 함수
   var setNumber = numberState[1];
+
+  // var dateState = useState((new Date()).toString());
+  // var _date = dateState[0];
+  // var setDate = dateState[1];
+
+  // 위 코드의 축약형
+  var [_date, setDate] = useState((new Date()).toString());
+
   return (
     <div className="container">
       <h2>function style component</h2>
       <p>Number : {number}</p>
+      <p>Date : {_date}</p>
       <input type="button" value="random" onClick={
           function() {
             setNumber(Math.random());
+          }
+        }></input>
+      <input type="button" value="date" onClick={
+          function() {
+            setDate((new Date()).toString());
           }
         }></input>
     </div>
@@ -34,16 +48,23 @@ function FuncComp(props) {
 
 class ClassComp extends React.Component{
   state = {
-    number:this.props.initNumber
+    number:this.props.initNumber,
+    date:(new Date()).toString()
   }
   render() {
     return (
       <div className="container">
         <h2>class style component</h2>
         <p>Number : {this.state.number}</p>
+        <p>Data : {this.state.date}</p>
         <input type="button" value="random" onClick={
           function() {
             this.setState({number:Math.random()})
+          }.bind(this)
+        }></input>
+        <input type="button" value="date" onClick={
+          function() {
+            this.setState({date:(new Date()).toString()})
           }.bind(this)
         }></input>
       </div>
