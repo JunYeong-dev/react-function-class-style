@@ -34,6 +34,9 @@ function FuncComp(props) {
     console.log('%cfunc => useEffect ( = componentDidMount & componentDidUpdate)' + (++funcId), funcStyle);
     // title을 변경해주는 것
     document.title = number + ':' + _date;
+    return function cleanup() {
+      console.log('%cfunc => useEffect return ( = componentDidMount & componentDidUpdate)' + (++funcId), funcStyle);
+    }
   });
 
   console.log('%cfunc => render ' + (++funcId), funcStyle);
