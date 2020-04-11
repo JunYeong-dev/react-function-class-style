@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 
 function App() {
@@ -11,6 +11,8 @@ function App() {
   );
 }
 
+var funcStyle = 'color:blue';
+var funcId = 0;
 // 여기서 props는 변수의 이름일뿐 다른 이름으로 변경해도 상관없다.
 function FuncComp(props) {
   // useState : function style에서 state를 만들때 사용; 매개변수는 state의 초기값; 배열을 리턴
@@ -27,6 +29,14 @@ function FuncComp(props) {
   // 위 코드의 축약형
   var [_date, setDate] = useState((new Date()).toString());
 
+  // side effect
+  useEffect(function() {
+    console.log('%cfunc => useEffect ( = componentDidMount & componentDidUpdate)' + (++funcId), funcStyle);
+    // title을 변경해주는 것
+    document.title = number + ':' + _date;
+  });
+
+  console.log('%cfunc => render ' + (++funcId), funcStyle);
   return (
     <div className="container">
       <h2>function style component</h2>
